@@ -8,3 +8,4 @@ Screenshots are stored in [`screenshots/`](screenshots/) and listed here in orde
 
 | # | Step | Screenshot |
 |---|------|------------|
+| 1 | **Explore IAM users** — The IAM console lists 4 users. `awsstudent` (path `/`) is the lab login, and its details show "Access denied" because it can't view itself. `user-1`, `user-2` and `user-3` are under path `/spl66/`. Each has 0 groups, a 6-minute-old password and an active access key. | ![IAM users](screenshots/01-iam-users.png) |
