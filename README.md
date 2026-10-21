@@ -29,3 +29,19 @@ Screenshots are stored in [`screenshots/`](screenshots/) and listed here in orde
 | 19 | **user-2 can't stop the instance** — Stopping `LabHost` fails with "You are not authorized to perform this operation... `user-2` is not authorized to perform: `ec2:StopInstances` ... because no identity-based policy allows the `ec2:StopInstances` action." This is an implicit deny: `AmazonEC2ReadOnlyAccess` only allows `Describe*`-type actions, and IAM denies anything not explicitly allowed. `user-2` can view instances but not change them. | ![user-2 denied stopping instance](screenshots/19-user-2-stop-denied.png) |
 | 20 | **user-2 can't create an S3 bucket** — As an extra test, `user-2` tries to create a bucket in S3. It fails with "Failed to create bucket. To create a bucket, the `s3:CreateBucket` permission is required." `user-2`'s only group, `EC2-Support`, grants no S3 permissions at all, so this is another implicit deny. | ![user-2 denied creating S3 bucket](screenshots/20-user-2-create-bucket-denied.png) |
 | 21 | **Sign in as user-3** — Signed in as `user-3` (`EC2-Admin`), the console starts in US East (Ohio) again. The EC2 dashboard shows "Access denied" everywhere because of the same SCP region block from Step 16. You need to switch to US East (N. Virginia). | ![Signed in as user-3 in Ohio](screenshots/21-signed-in-as-user-3-ohio.png) |
+| 22 | **user-3 can stop the instance** — In US East (N. Virginia), `user-3` selects `LabHost` and chooses **Stop instance**. The banner says "Successfully initiated stopping of i-08fcdefbff1aef99b", and the state changes to **Stopping**. The same action failed for `user-2` in Step 19. The `EC2-Admin` group's inline policy allows `ec2:StopInstances`. | ![user-3 stopping LabHost](screenshots/22-user-3-stops-labhost.png) |
+
+## Results
+
+| User | Group | Policy | View S3 | View EC2 | Stop EC2 instance |
+|------|-------|--------|---------|----------|-------------------|
+| user-1 | S3-Support | `AmazonS3ReadOnlyAccess` | ✅ | ❌ | — |
+| user-2 | EC2-Support | `AmazonEC2ReadOnlyAccess` | — | ✅ | ❌ |
+| user-3 | EC2-Admin | Inline policy | — | ✅ | ✅ |
+
+## Key takeaways
+
+- **Groups make permissions easier to manage.** Adding a user to a group gives them the group's policies, so you don't attach policies to each user one by one.
+- **Least privilege.** Each user can do only what their job needs. `user-1` can read S3 but not EC2, and `user-2` can view EC2 but not change it.
+- **Implicit deny.** If no policy allows an action, IAM denies it (Steps 19 and 20).
+- **Explicit deny wins.** A service control policy (SCP) from AWS Organizations blocked EC2 in US East (Ohio), even though `user-2`'s policy allowed it (Step 16). An explicit deny always overrides an allow.
