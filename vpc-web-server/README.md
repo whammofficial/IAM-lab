@@ -53,6 +53,10 @@ The **Routes** tab of `lab-rtb-private1-us-east-1a` shows why its subnets are pr
 
 ![Private route table routes](screenshots/03-private-route-table-routes.png)
 
+On the **Edit subnet associations** page, the Route table ID column shows that the two new subnets (`lab-subnet-public2` and `lab-subnet-private2`) are using the VPC's **Main** route table. Any subnet without an explicit association falls back to the main table, so each new subnet needs to be associated with the right table:
+
+![Edit subnet associations](screenshots/03-edit-subnet-associations.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
