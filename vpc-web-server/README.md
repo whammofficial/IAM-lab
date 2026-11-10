@@ -80,6 +80,10 @@ This lets anyone on the internet reach the web server from a browser, and nothin
 
 ![Creating Web Security Group](screenshots/04-create-web-security-group.png)
 
+The security group was created successfully (`sg-0db52fe0ba7baed6b`). Its **Inbound rules** tab shows the single HTTP rule over IPv4:
+
+![Web Security Group created](screenshots/04-web-security-group-created.png)
+
 ### 5. Launch the web server
 I launched an EC2 instance, **Web Server 1**, in the second public subnet (`10.0.2.0/24`) with the web security group attached, then opened its public address in a browser to confirm the web page loaded.
 
