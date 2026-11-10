@@ -109,8 +109,21 @@ Under **Advanced details → User data**, a startup script runs automatically th
 
 The launch succeeded, creating instance `i-01189f13fde48efd6`.
 
-### 6. Submit
-I submitted the lab for grading and ended the session.
+### 6. Submit and grade
+I submitted the lab for grading and scored **30/30**:
+
+| Task | Score |
+|------|-------|
+| Task 1: VPC created correctly | 5/5 |
+| Task 2a: New subnets created correctly | 5/5 |
+| Task 2b: Subnet route table association | 5/5 |
+| Task 3: Security group created correctly | 5/5 |
+| Task 4a: EC2 instance created correctly | 5/5 |
+| Task 4b: EC2 instance website accessible | 5/5 |
+
+Task 4b confirms that the grader could reach the web server over the internet, which tests the whole path: internet gateway → public route table → public subnet → security group → Apache on the instance.
+
+![Grades: 30/30](screenshots/06-grades-30-of-30.png)
 
 ## Key takeaways
 
