@@ -70,7 +70,15 @@ After I saved, both `lab-rtb-public` and `lab-rtb-private1-us-east-1a` show **2 
 ![Both route tables have 2 subnets](screenshots/03-both-route-tables-done.png)
 
 ### 4. Create a security group for the web server
-I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
+I created **Web Security Group** (description: "Enable HTTP access") in `lab-vpc` with one inbound rule:
+
+| Type | Protocol | Port | Source | Description |
+|------|----------|------|--------|-------------|
+| HTTP | TCP | 80 | `0.0.0.0/0` (Anywhere-IPv4) | Permit web requests |
+
+This lets anyone on the internet reach the web server from a browser, and nothing else. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed. Because the rule only opens port 80, other ports such as SSH (22) stay closed.
+
+![Creating Web Security Group](screenshots/04-create-web-security-group.png)
 
 ### 5. Launch the web server
 I launched an EC2 instance, **Web Server 1**, in the second public subnet (`10.0.2.0/24`) with the web security group attached, then opened its public address in a browser to confirm the web page loaded.
