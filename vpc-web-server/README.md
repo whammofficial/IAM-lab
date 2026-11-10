@@ -61,6 +61,10 @@ After I added `lab-subnet-private2` and saved, a banner confirms the update, and
 
 ![Private route table now has 2 subnets](screenshots/03-private-associations-saved.png)
 
+Then I did the same for `lab-rtb-public`, selecting both `lab-subnet-public1-us-east-1a` and `lab-subnet-public2`. The table also confirms that `lab-subnet-private2` now belongs to the private route table:
+
+![Editing public route table associations](screenshots/03-edit-public-associations.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
