@@ -18,7 +18,37 @@ Hands-on AWS networking lab. I build a custom Amazon VPC with public and private
 | Security group | Allows HTTP to the web server |
 | EC2 instance | Web Server 1, in public subnet 2 |
 
-## Progress
+## Steps
 
-| # | Step | Screenshot |
-|---|------|------------|
+> I completed this lab but didn't take screenshots while working, so this write-up describes what I built.
+
+### 1. Create the VPC with "VPC and more"
+In the VPC console, I used the **VPC and more** option to create several resources at once, with the name prefix `lab`:
+- A VPC with the IPv4 CIDR block `10.0.0.0/16`
+- One Availability Zone, with one public subnet (`10.0.0.0/24`) and one private subnet (`10.0.1.0/24`)
+- An internet gateway, plus a NAT gateway in the public subnet
+- A public route table that sends internet traffic (`0.0.0.0/0`) to the internet gateway, and a private route table that sends it to the NAT gateway
+
+What makes the first subnet **public** is its route table, which points internet traffic at the internet gateway. Instances in the **private** subnet reach the internet through the NAT gateway, but the internet can't start connections to them.
+
+### 2. Add subnets in a second Availability Zone
+I created two more subnets in Availability Zone B, a public one (`10.0.2.0/24`) and a private one (`10.0.3.0/24`). Spreading subnets across two Availability Zones means the design keeps working if one zone has an outage, which is the basis of **high availability**.
+
+### 3. Associate the new subnets with route tables
+I associated the new public subnet with the public route table and the new private subnet with the private route table. Each new subnet now follows the same rules as its matching subnet in Availability Zone A.
+
+### 4. Create a security group for the web server
+I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
+
+### 5. Launch the web server
+I launched an EC2 instance, **Web Server 1**, in the second public subnet (`10.0.2.0/24`) with the web security group attached, then opened its public address in a browser to confirm the web page loaded.
+
+### 6. Submit
+I submitted the lab for grading and ended the session.
+
+## Key takeaways
+
+- **Public vs. private is set by routing.** A subnet is public only because its route table sends `0.0.0.0/0` to an internet gateway.
+- **NAT gateways allow outbound-only internet access.** Private instances can download updates without being exposed to the internet.
+- **Use multiple Availability Zones for high availability.**
+- **Security groups add a layer of defense.** Even in a public subnet, an instance accepts only the traffic its security group allows.
