@@ -45,6 +45,10 @@ Creating `lab-subnet-private2` in the same zone (`us-east-1b`) with `10.0.3.0/24
 ### 3. Associate the new subnets with route tables
 I associated the new public subnet with the public route table and the new private subnet with the private route table. Each new subnet now follows the same rules as its matching subnet in Availability Zone A.
 
+Before the change, `lab-rtb-private1-us-east-1a` has only one explicit subnet association, `lab-subnet-private1-us-east-1a`. `lab-rtb-public` also has just one:
+
+![Route tables before associating the new subnets](screenshots/03-route-tables-before.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
