@@ -85,7 +85,29 @@ The security group was created successfully (`sg-0db52fe0ba7baed6b`). Its **Inbo
 ![Web Security Group created](screenshots/04-web-security-group-created.png)
 
 ### 5. Launch the web server
-I launched an EC2 instance, **Web Server 1**, in the second public subnet (`10.0.2.0/24`) with the web security group attached, then opened its public address in a browser to confirm the web page loaded.
+I launched an EC2 instance, **Web Server 1**, with these settings:
+
+| Setting | Value |
+|---------|-------|
+| AMI | Amazon Linux 2023 (free tier eligible) |
+| Instance type | `t2.micro` |
+| Key pair | `vockey` |
+| VPC | `lab-vpc` |
+| Subnet | `lab-subnet-public2` (`10.0.2.0/24`, `us-east-1b`) |
+| Auto-assign public IP | Enabled |
+| Security group | Web Security Group |
+
+![AMI and instance type](screenshots/05-launch-ami-instance-type.png)
+
+The **Network settings** put the instance in `lab-subnet-public2` with a public IP address, so it's reachable from the internet through the public route table. **Web Security Group** controls which traffic gets in:
+
+![Network settings](screenshots/05-launch-network-settings.png)
+
+Under **Advanced details → User data**, a startup script runs automatically the first time the instance boots. It installs the Apache web server and PHP, downloads the lab's web app into `/var/www/html/`, and starts Apache. This means the server comes up ready to serve the site without me logging in to set it up:
+
+![User data script](screenshots/05-launch-user-data.png)
+
+The launch succeeded, creating instance `i-01189f13fde48efd6`.
 
 ### 6. Submit
 I submitted the lab for grading and ended the session.
