@@ -49,6 +49,10 @@ Before the change, `lab-rtb-private1-us-east-1a` has only one explicit subnet as
 
 ![Route tables before associating the new subnets](screenshots/03-route-tables-before.png)
 
+The **Routes** tab of `lab-rtb-private1-us-east-1a` shows why its subnets are private: `10.0.0.0/16` stays inside the VPC (`local`), and all other traffic (`0.0.0.0/0`) goes to the NAT gateway, not an internet gateway. Any subnet associated with this table follows these routes:
+
+![Private route table routes](screenshots/03-private-route-table-routes.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
