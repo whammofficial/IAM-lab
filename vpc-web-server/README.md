@@ -38,6 +38,10 @@ Creating `lab-subnet-public2` in `lab-vpc`, in `us-east-1b`, with the CIDR block
 
 ![Creating lab-subnet-public2](screenshots/02-create-public-subnet-2.png)
 
+Creating `lab-subnet-private2` in the same zone (`us-east-1b`) with `10.0.3.0/24`:
+
+![Creating lab-subnet-private2](screenshots/02-create-private-subnet-2.png)
+
 ### 3. Associate the new subnets with route tables
 I associated the new public subnet with the public route table and the new private subnet with the private route table. Each new subnet now follows the same rules as its matching subnet in Availability Zone A.
 
