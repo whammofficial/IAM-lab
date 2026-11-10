@@ -65,6 +65,10 @@ Then I did the same for `lab-rtb-public`, selecting both `lab-subnet-public1-us-
 
 ![Editing public route table associations](screenshots/03-edit-public-associations.png)
 
+After I saved, both `lab-rtb-public` and `lab-rtb-private1-us-east-1a` show **2 subnets**. Each Availability Zone now has one public and one private subnet, each routed correctly:
+
+![Both route tables have 2 subnets](screenshots/03-both-route-tables-done.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
