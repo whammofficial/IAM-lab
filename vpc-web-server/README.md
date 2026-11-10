@@ -109,6 +109,12 @@ Under **Advanced details → User data**, a startup script runs automatically th
 
 The launch succeeded, creating instance `i-01189f13fde48efd6`.
 
+Once the instance was running, I opened `http://` plus its public IP address in a browser, and the web app loaded. It shows the instance's own metadata, **Instance ID `i-01189f13fde48efd6`** in **`us-east-1b`**, which proves the page is served by Web Server 1 in `lab-subnet-public2`:
+
+![Web server page loaded](screenshots/05-web-page-loaded.png)
+
+> **Troubleshooting note:** My first try showed `ERR_CONNECTION_RESET`. The security group only allows HTTP on port 80, so the browser has to use `http://`, not `https://`. Typing `http://` in front of the address fixed it.
+
 ### 6. Submit and grade
 I submitted the lab for grading and scored **30/30**:
 
