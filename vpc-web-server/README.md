@@ -20,7 +20,7 @@ Hands-on AWS networking lab. I build a custom Amazon VPC with public and private
 
 ## Steps
 
-> I completed this lab but didn't take screenshots while working, so this write-up describes what I built.
+> I completed this lab once without taking screenshots, then rebuilt parts of it to capture them. Steps without a screenshot describe what I built.
 
 ### 1. Create the VPC with "VPC and more"
 In the VPC console, I used the **VPC and more** option to create several resources at once, with the name prefix `lab`:
@@ -33,6 +33,10 @@ What makes the first subnet **public** is its route table, which points internet
 
 ### 2. Add subnets in a second Availability Zone
 I created two more subnets in Availability Zone B, a public one (`10.0.2.0/24`) and a private one (`10.0.3.0/24`). Spreading subnets across two Availability Zones means the design keeps working if one zone has an outage, which is the basis of **high availability**.
+
+Creating `lab-subnet-public2` in `lab-vpc`, in `us-east-1b`, with the CIDR block `10.0.2.0/24` (256 IP addresses):
+
+![Creating lab-subnet-public2](screenshots/02-create-public-subnet-2.png)
 
 ### 3. Associate the new subnets with route tables
 I associated the new public subnet with the public route table and the new private subnet with the private route table. Each new subnet now follows the same rules as its matching subnet in Availability Zone A.
