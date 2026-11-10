@@ -57,6 +57,10 @@ On the **Edit subnet associations** page, the Route table ID column shows that t
 
 ![Edit subnet associations](screenshots/03-edit-subnet-associations.png)
 
+After I added `lab-subnet-private2` and saved, a banner confirms the update, and `lab-rtb-private1-us-east-1a` now lists **2 subnets**. Both private subnets now send internet traffic through the NAT gateway:
+
+![Private route table now has 2 subnets](screenshots/03-private-associations-saved.png)
+
 ### 4. Create a security group for the web server
 I created a security group in `lab-vpc` that allows inbound HTTP traffic, so people can reach the web server from a browser. A security group works like a firewall on the instance itself: it blocks any inbound traffic you haven't allowed.
 
